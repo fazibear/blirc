@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'sinatra'
-require 'simple-rss'
 require 'open-uri'
 require 'md5'
 require 'oauth'
