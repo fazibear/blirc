@@ -7,10 +7,21 @@ require 'oauth/consumer'
 require 'json'
 
 enable :sessions
- 
+
+configure do
+  OKEY = 'VdulYO3aqGeSTy0D6dsa'
+  OPASS = 'LDl3M1r9szhymatoxNtUEM7QN20nkQif2VgSDu0w'
+end
+
+configure :production do
+  OKEY = 'gkaRVeN4gYyjAaqW2nJRgkaRVeN4gYyjAaqW2nJR'
+  OPASS = 'WmTawWjg9EVHy24IuxD7wJczwfP7zn2he3y195l8'
+end
+
 before do
   session[:oauth] ||= {}
-  @consumer ||=OAuth::Consumer.new "VdulYO3aqGeSTy0D6dsa", "LDl3M1r9szhymatoxNtUEM7QN20nkQif2VgSDu0w", {
+  
+  @consumer ||= OAuth::Consumer.new OKEY, OPASS, {
     :site => "http://blip.pl"
   }
   
@@ -21,13 +32,16 @@ before do
   if !session[:oauth][:access_token].nil? && !session[:oauth][:access_token_secret].nil?
     @access_token = OAuth::AccessToken.new(@consumer, session[:oauth][:access_token], session[:oauth][:access_token_secret])
   end
+  
+  session[:user] ||= get_current_user 
+  @user = session[:user]
+
 end
 
 helpers do
   LINK_REGEXP =  %r{https?:\/\/[^\>\<\s\"\]]+}
   TAG_REGEXP = %r{#[0-9a-zA-ZĄĆĘŃÓŁŚŹŻąćęńółśźżäëïöüÄËÏÖÜ_-]+}
   USER_REGEXP = %r{(?!\b)+(\^)(\w+)}
-
 
   def get_dashboard_since
     since = session[:last_id]
@@ -77,16 +91,15 @@ helpers do
       } )
     end
     out
-    
   end
-
 
   def get_current_user
     begin
+      puts "ask for user"
       json = @access_token.get('/profile?include=background').body
       JSON.parse(json)
     rescue => e
-      nil
+      redirect :logout
     end
   end
   
@@ -99,22 +112,21 @@ end
 
 get "/" do
   if @access_token
-    @background_url = get_current_user["background"]["url"]
-    @current_user = get_current_user["login"]
+    @background_url = @user["background"]["url"]
+    @current_user = @user["login"]
     @body = get_dashboard
-    erb :content
+    erb :console
   else
     erb :start
   end
 end
 
 get "/refresh" do
-  @body = get_dashboard_since
-  erb :content, :layout => false
+  get_dashboard_since
 end
 
 
-get "/request" do
+post "/request" do
   @request_token = @consumer.get_request_token
   session[:oauth][:request_token] = @request_token.token
   session[:oauth][:request_token_secret] = @request_token.secret
@@ -132,17 +144,3 @@ get "/logout" do
   session[:oauth] = {}
   redirect "/"
 end
-
-
-use_in_file_templates!
- 
-__END__
- 
-@@ start
-<a href="/request">PWN OAuth</a>
- 
-@@ ready
-OAuth PWND. <a href="/logout">Retreat!</a>
-
-@@content
-<%=@body%>

@@ -1,0 +1,7 @@
+<div id="console">
+  <%= @body %>
+</div>
+<div id="input_box">
+  <span id="prompt"><%=erb(:prompt, :layout => false, :locals => { :date => time_format(Time.now), :user => @current_user})%></span><input id="input" maxlength="160"/>
+</div>
+

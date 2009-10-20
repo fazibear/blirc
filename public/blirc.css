@@ -2,13 +2,20 @@ body {margin: 0;}
 
 h1, h3 { text-align: center }
 
+#welcome {
+  text-align: center;
+}
+
+#welcome form {
+  margin-top: 5px;
+}
+
 #container {
   font-size: 12px;
   color: white;
   font-family: monospace;
   background-color: black;
   padding: 5px;
-  height: 100%;
 }
 
 #console {

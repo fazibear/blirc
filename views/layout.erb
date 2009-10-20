@@ -13,12 +13,7 @@
   <body>
     <div id="container"> 
       <h1>Blirc!</h1>
-      <div id="console">
         <%= yield %>
-      </div>
-      <div id="input_box">
-        <span id="prompt"><%=erb(:prompt, :layout => false, :locals => { :date => time_format(Time.now), :user => @current_user})%></span><input id="input" maxlength="160"/>
-      </div>
       <h3>Blirc! (r) fazibear 2oo9</h3>
     </div>
   </body>
