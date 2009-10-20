@@ -1,0 +1,48 @@
+body {margin: 0;}
+
+h1, h3 { text-align: center }
+
+#container {
+  font-size: 12px;
+  color: white;
+  font-family: monospace;
+  background-color: black;
+  padding: 5px;
+  height: 100%;
+}
+
+#console {
+  border: 1px solid #BAAE9E;
+  height: 494px;
+  overflow-x: auto;
+  padding: 5px;
+  margin: 2px;
+}
+
+#input_box {
+  border: 1px solid #BAAE9E;
+  padding: 5px;
+  margin: 2px;
+}
+
+#input {
+  width: 70%;
+  border: 0px;
+  color: white;
+  font-family: monospace;
+  font-size: 12px;
+  background-color: black;
+}
+
+#prompt {
+}
+
+
+.date_color { color: #937121 }
+.user_color { color: #CF6A4C }
+.recipient_color { color: #5EA6EA }
+.body_color { color: #BAAE9E }
+
+.body_color .tag_color { color: #54BE0D }
+.body_color .link_color { color: #666666; text-decoration: none }
+

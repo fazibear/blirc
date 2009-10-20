@@ -1,0 +1,20 @@
+<div class="line">
+<% case kind
+   when "Status" %> 
+   <%=erb(:prompt, :layout => false, :locals => {:date => date, :user => user }) %>
+   : 
+   <span class="body_color"><%=body%></span>
+<% when "DirectedMessage" %>
+  <%=erb(:prompt, :layout => false, :locals => {:date => date, :user => user }) %> 
+  > 
+  <span class="recipient_color"><%=recipient%></span>
+  : 
+  <span class="body_color"><%=body%></span>
+<% when "PrivateMessage" %>
+  <%=erb(:prompt, :layout => false, :locals => {:date => date, :user => user }) %>
+  >>
+  <span class="recipient_color"><%=recipient%></span>
+  : 
+  <span class="body_color"><%=body%></span>
+<% end %>
+</div>
