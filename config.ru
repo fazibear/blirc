@@ -1,2 +1,2 @@
-require 'blipos'
+require 'blirc'
 run Sinatra::Application
