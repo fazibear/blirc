@@ -14,7 +14,7 @@ configure do
 end
 
 configure :production do
-  $oKEY = 'gkaRVeN4gYyjAaqW2nJRgkaRVeN4gYyjAaqW2nJR'
+  $oKEY = 'gkaRVeN4gYyjAaqW2nJR'
   $oPASS = 'WmTawWjg9EVHy24IuxD7wJczwfP7zn2he3y195l8'
 end
 
