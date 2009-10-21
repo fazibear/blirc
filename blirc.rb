@@ -8,20 +8,20 @@ require 'json'
 
 enable :sessions
 
-#configure do
-#  $oKEY = 'VdulYO3aqGeSTy0D6dsa'
-#  $oPASS = 'LDl3M1r9szhymatoxNtUEM7QN20nkQif2VgSDu0w'
-#end
+configure do
+  $oKEY = 'VdulYO3aqGeSTy0D6dsa'
+  $oPASS = 'LDl3M1r9szhymatoxNtUEM7QN20nkQif2VgSDu0w'
+end
 
-#configure :production do
-#  $oKEY = 'gkaRVeN4gYyjAaqW2nJR'
-#  $oPASS = 'WmTawWjg9EVHy24IuxD7wJczwfP7zn2he3y195l8'
-#end
+configure :production do
+  $oKEY = 'gkaRVeN4gYyjAaqW2nJR'
+  $oPASS = 'WmTawWjg9EVHy24IuxD7wJczwfP7zn2he3y195l8'
+end
 
 before do
   session[:oauth] ||= {}
   
-  @consumer ||= OAuth::Consumer.new 'gkaRVeN4gYyjAaqW2nJR', 'WmTawWjg9EVHy24IuxD7wJczwfP7zn2he3y195l8', {
+  @consumer ||= OAuth::Consumer.new $oKEY, $oPASS, {
     :site => "http://blip.pl"
   }
   
