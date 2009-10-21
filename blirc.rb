@@ -14,14 +14,14 @@ enable :sessions
 #end
 
 #configure :production do
-  $oKEY = 'gkaRVeN4gYyjAaqW2nJR'
-  $oPASS = 'WmTawWjg9EVHy24IuxD7wJczwfP7zn2he3y195l8'
+#  $oKEY = 'gkaRVeN4gYyjAaqW2nJR'
+#  $oPASS = 'WmTawWjg9EVHy24IuxD7wJczwfP7zn2he3y195l8'
 #end
 
 before do
   session[:oauth] ||= {}
   
-  @consumer ||= OAuth::Consumer.new $oKEY, $oPASS, {
+  @consumer ||= OAuth::Consumer.new 'gkaRVeN4gYyjAaqW2nJR', 'WmTawWjg9EVHy24IuxD7wJczwfP7zn2he3y195l8', {
     :site => "http://blip.pl"
   }
   
