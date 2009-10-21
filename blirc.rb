@@ -99,7 +99,7 @@ helpers do
       json = @access_token.get('/profile?include=background').body
       JSON.parse(json)
     rescue => e
-      redirect :logout
+      {}
     end
   end
   
