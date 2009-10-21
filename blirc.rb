@@ -31,10 +31,10 @@ before do
   
   if !session[:oauth][:access_token].nil? && !session[:oauth][:access_token_secret].nil?
     @access_token = OAuth::AccessToken.new(@consumer, session[:oauth][:access_token], session[:oauth][:access_token_secret])
+    session[:user] ||= get_current_user 
+    @user = session[:user]
   end
   
-  session[:user] ||= get_current_user 
-  @user = session[:user]
 
 end
 
