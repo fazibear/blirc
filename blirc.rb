@@ -139,7 +139,16 @@ get "/callback" do
   session[:oauth][:access_token_secret] = @access_token.secret
   redirect "/"
 end
- 
+
+post "/update" do
+  begin
+    @access_token.post("/updates?include=user,recipient", { 'update[body]' => params[:text] })
+  rescue => e
+    return ""
+  end
+  ""
+end
+
 get "/logout" do
   session[:oauth] = {}
   redirect "/"
